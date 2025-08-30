@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="es" class="h-full">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Roadmap Matemáticas para Ciencia de Datos e IA</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            base: {
+              50:'#f8fafc',100:'#f1f5f9',200:'#e2e8f0',300:'#cbd5e1',400:'#94a3b8',
+              500:'#64748b',600:'#475569',700:'#334155',800:'#1f2937',900:'#0f172a',950:'#020617'
+            },
+            light: {
+              50:'#ffffff',100:'#fefefe',200:'#fdfcfc',300:'#fbfafa',400:'#f8f7f7',
+              500:'#f5f4f4',600:'#f2f1f1',700:'#efeeee',800:'#ecebeb',900:'#e9e8e8'
+            }
+          },
+          boxShadow: {
+            glow: '0 10px 25px -5px rgba(59,130,246,.15), 0 8px 10px -6px rgba(59,130,246,.2)',
+            soft: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    /* Scrollbar minimal */
+    ::-webkit-scrollbar{height:8px;width:8px}
+    ::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:999px}
+    ::-webkit-scrollbar-track{background:#f1f5f9}
+    
+    /* Asegurar que el header de la tabla se mantenga fijo */
+    thead {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background-color: rgb(255 255 255 / 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 2px solid #e2e8f0;
+    }
+    
+    /* Asegurar que las celdas del header tengan el fondo correcto */
+    thead th {
+      background-color: rgb(255 255 255 / 0.95);
+      backdrop-filter: blur(8px);
+      font-weight: 600;
+      color: #374151;
+    }
+    
+    /* Estilos para el tema claro */
+    body {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    }
+    
+    .table-row-hover:hover {
+      background-color: #f8fafc;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+    
+    .card {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 text-gray-800 selection:bg-blue-500/20 selection:text-white">
+  <!-- HEADER -->
+  <header class="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-white/80 border-b border-gray-200">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between py-4">
+        <div class="flex items-center gap-3">
+          <div class="h-10 w-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shadow-glow grid place-content-center">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6 text-white"><path d="M9.53 2.16a2.25 2.25 0 0 1 4.94 0l.143.572a2.25 2.25 0 0 0 1.651 1.651l.572.143a2.25 2.25 0 0 1 0 4.94l-.572.143a2.25 2.25 0 0 0-1.651 1.651l-.143.572a2.25 2.25 0 0 1-4.94 0l-.143-.572a2.25 2.25 0 0 0-1.651-1.651l-.572-.143a2.25 2.25 0 0 1 0-4.94l.572-.143a2.25 2.25 0 0 0 1.651-1.651l.143-.572Z"/><path d="M4.26 14.147a1.25 1.25 0 0 1 2.42 0l.07.28c.17.67.67 1.2 1.33 1.4l.28.07a1.25 1.25 0 0 1 0 2.42l-.28.07c-.66.17-1.16.71-1.33 1.38l-.07.28a1.25 1.25 0 0 1-2.42 0l-.07-.28c-.17-.67-.67-1.21-1.33-1.38l-.28-.07a1.25 1.25 0 0 1 0-2.42l.28-.07c.66-.2 1.16-.73 1.33-1.4l.07-.28Z"/></svg>
+          </div>
+          <div>
+            <h1 class="text-xl font-bold tracking-tight text-gray-900">🚀 Roadmap Matemático Avanzado — IA & ML</h1>
+            <p class="text-sm text-gray-600">📚 Matemáticas Avanzadas para Ciencia de Datos & Inteligencia Artificial</p>
+          </div>
+        </div>
+        <div class="hidden md:flex items-center gap-3">
+          <button id="btnExportCSV" class="rounded-xl border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 active:scale-[.98] transition shadow-soft">
+            📊 Exportar CSV
+          </button>
+          <button id="btnExportJSON" class="rounded-xl border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 active:scale-[.98] transition shadow-soft">
+            📄 Exportar JSON
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Controls -->
+    <div class="border-t border-gray-200 bg-gray-50/80">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
+          <label class="block">
+            <span class="mb-1 block text-sm font-medium text-gray-700">🔍 Buscar (tema, área, recurso)</span>
+            <input id="search" type="text" placeholder="Ej. derivadas, PCA, Bayes, ANOVA..." class="w-full rounded-xl border border-gray-300 bg-white px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 shadow-soft" />
+          </label>
+          <label class="block">
+            <span class="mb-1 block text-sm font-medium text-gray-700">📁 Área</span>
+            <select id="areaFilter" class="w-full rounded-xl border border-gray-300 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 shadow-soft">
+              <option value="">🌐 Todas las áreas</option>
+              <option value="Álgebra Lineal">📐 Álgebra Lineal</option>
+              <option value="Cálculo">📊 Cálculo</option>
+              <option value="Probabilidad">🎲 Probabilidad</option>
+              <option value="Estadística">📈 Estadística</option>
+              <option value="Estadística Avanzada">🔬 Estadística Avanzada</option>
+              <option value="ML Matemático">🤖 ML Matemático</option>
+              <option value="IA Avanzada">🧠 IA Avanzada</option>
+              <option value="Matemáticas Especializadas">⚡ Matemáticas Especializadas</option>
+              <option value="Investigación">🔬 Investigación</option>
+            </select>
+          </label>
+          <label class="block">
+            <span class="mb-1 block text-sm font-medium text-gray-700">📊 Nivel</span>
+            <select id="levelFilter" class="w-full rounded-xl border border-gray-300 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 shadow-soft">
+              <option value="">⭐ Todos los niveles</option>
+              <option value="1">🥇 Nivel 1</option>
+              <option value="2">🥈 Nivel 2</option>
+              <option value="3">🥉 Nivel 3</option>
+              <option value="4">🏅 Nivel 4</option>
+              <option value="5">🎖️ Nivel 5</option>
+              <option value="6">🏆 Nivel 6</option>
+              <option value="7">👑 Nivel 7</option>
+              <option value="8">💎 Nivel 8</option>
+              <option value="9">🌟 Nivel 9</option>
+              <option value="10">🚀 Nivel 10</option>
+              <option value="11">⚡ Nivel 11</option>
+              <option value="12">🔥 Nivel 12</option>
+            </select>
+          </label>
+          <div class="flex items-end gap-3 md:hidden">
+            <button id="btnExportCSV_m" class="flex-1 rounded-xl border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 shadow-soft">📊 CSV</button>
+            <button id="btnExportJSON_m" class="flex-1 rounded-xl border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 shadow-soft">📄 JSON</button>
+          </div>
+        </div>
+        <div class="mt-3 flex items-center justify-between">
+          <p class="text-sm text-gray-600">✅ Marca los temas completados para ver tu avance</p>
+          <div class="flex items-center gap-3">
+            <span id="progressText" class="text-sm font-medium text-gray-700">0% completado</span>
+            <div class="h-3 w-64 overflow-hidden rounded-full bg-gray-200 shadow-inner">
+              <div id="progressBar" class="h-full w-0 bg-gradient-to-r from-blue-500 to-indigo-600 transition-[width] duration-500 shadow-soft"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
+    <!-- Mensaje de estado -->
+    <div id="statusMessage" class="mb-4 p-4 rounded-xl border border-gray-200 bg-white/80 text-center shadow-soft">
+      <p class="text-gray-700">⏳ Cargando temas...</p>
+    </div>
+    
+    <div class="rounded-2xl border border-gray-200 bg-white/90 shadow-soft">
+      <div class="overflow-x-auto rounded-2xl">
+        <table class="min-w-full text-left text-sm">
+          <thead class="bg-white/95 text-gray-700 sticky top-0 z-40">
+            <tr>
+              <th class="px-4 py-3 font-semibold">✅ Done</th>
+              <th class="px-4 py-3 font-semibold">📊 Nivel</th>
+              <th class="px-4 py-3 font-semibold">📁 Área</th>
+              <th class="px-4 py-3 font-semibold">📚 Tema / Subtema</th>
+              <th class="px-4 py-3 font-semibold">💡 Ejemplo aplicado</th>
+              <th class="px-4 py-3 font-semibold">🔗 Recursos</th>
+            </tr>
+          </thead>
+          <tbody id="tbody" class="divide-y divide-gray-200">
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <footer class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 text-sm text-gray-600">
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5 text-blue-500"><path d="M3.75 13.5A6.75 6.75 0 0 1 10.5 6.75h3.75a6 6 0 0 1 6 6V18a2.25 2.25 0 0 1-2.25 2.25h-3a2.25 2.25 0 0 1-2.25-2.25v-3.75A2.25 2.25 0 0 0 10.5 12h-3a3.75 3.75 0 0 0-3.75 3.75V18A2.25 2.25 0 0 1 1.5 20.25H1.5"/></svg>
+        <span>💡 Sugerencia: avanza del Nivel 1 → 12. Usa filtros para estudiar por módulos especializados.</span>
+      </div>
+      <div>Hecho con <span class="text-red-500">❤️</span> y TailwindCSS</div>
+    </div>
+  </footer>
+
+  <script>
+  // ======= Datos del roadmap (versión avanzada y detallada) =======
+  const DATA = [
+    // NIVEL 1: Álgebra Lineal Básica
+    {level:1, area:'Álgebra Lineal', topic:'Vectores: definición, operaciones básicas y propiedades', example:'Representación de características en datasets, normalización de vectores', resources:[{name:'3Blue1Brown: Vectores', url:'https://www.youtube.com/watch?v=fNk_zzaMoSs'},{name:'Khan Academy: Álgebra Lineal', url:'https://www.khanacademy.org/math/linear-algebra'}]},
+    {level:1, area:'Álgebra Lineal', topic:'Producto punto y producto cruz, ortogonalidad', example:'Cálculo de similitud entre documentos, proyecciones ortogonales', resources:[{name:'MIT OCW: Gilbert Strang', url:'https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/'},{name:'Essence of Linear Algebra', url:'https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr'}]},
+    {level:1, area:'Álgebra Lineal', topic:'Matrices: tipos, operaciones básicas y transpuesta', example:'Matrices de datos, transformaciones lineales, operaciones elementales', resources:[{name:'Linear Algebra Done Right', url:'https://linear.axler.net/'},{name:'Khan: Matrices', url:'https://www.khanacademy.org/math/linear-algebra/matrix-transformations'}]},
+    {level:1, area:'Álgebra Lineal', topic:'Sistemas de ecuaciones lineales y eliminación gaussiana', example:'Resolver sistemas de restricciones en optimización, análisis de dependencias', resources:[{name:'Strang: Introduction to Linear Algebra', url:'https://math.mit.edu/~gs/linearalgebra/'},{name:'Paul\'s Online Math Notes', url:'https://tutorial.math.lamar.edu/classes/alg/systemseigenvals.aspx'}]},
+
+    // NIVEL 2: Álgebra Lineal Intermedia
+    {level:2, area:'Álgebra Lineal', topic:'Determinantes: propiedades y cálculo', example:'Verificar independencia lineal, calcular volúmenes en transformaciones', resources:[{name:'MIT 18.06: Determinants', url:'https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/video-lectures/lecture-18-properties-of-determinants/'},{name:'Khan: Determinants', url:'https://www.khanacademy.org/math/linear-algebra/matrix-transformations/determinant-depth'}]},
+    {level:2, area:'Álgebra Lineal', topic:'Matriz inversa y métodos de cálculo', example:'Resolver ecuaciones matriciales, transformaciones inversas', resources:[{name:'Strang: Matrix Inverses', url:'https://math.mit.edu/~gs/linearalgebra/ila5th_sec2_5.pdf'},{name:'Linear Algebra and Its Applications', url:'https://www.cengage.com/c/linear-algebra-and-its-applications-5e-lay/'}]},
+    {level:2, area:'Álgebra Lineal', topic:'Espacios vectoriales: definición, subespacios y bases', example:'Espacios de características, reducción de dimensionalidad', resources:[{name:'Linear Algebra Done Right: Vector Spaces', url:'https://linear.axler.net/VectorSpaces.pdf'},{name:'MIT: Vector Spaces', url:'https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/video-lectures/lecture-7-solving-ax-0-pivot-variables-special-solutions/'}]},
+    {level:2, area:'Álgebra Lineal', topic:'Independencia lineal, rango y nulidad', example:'Análisis de correlaciones, detección de redundancia en datos', resources:[{name:'Essence of Linear Algebra: Rank', url:'https://www.youtube.com/watch?v=uQhTuRlWMxw'},{name:'Khan: Linear Independence', url:'https://www.khanacademy.org/math/linear-algebra/vectors-and-spaces/linear-independence'}]},
+
+    // NIVEL 3: Álgebra Lineal Avanzada
+    {level:3, area:'Álgebra Lineal', topic:'Valores y vectores propios: definición y propiedades', example:'PCA (Principal Component Analysis), análisis de componentes principales', resources:[{name:'3Blue1Brown: Eigenvectors', url:'https://www.youtube.com/watch?v=PFDu9oVAE-g'},{name:'MIT: Eigenvalues and Eigenvectors', url:'https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/video-lectures/lecture-21-eigenvalues-and-eigenvectors/'}]},
+    {level:3, area:'Álgebra Lineal', topic:'Diagonalización y formas canónicas', example:'Descomposición espectral, simplificación de cálculos matriciales', resources:[{name:'Strang: Diagonalization', url:'https://math.mit.edu/~gs/linearalgebra/ila5th_sec6_2.pdf'},{name:'Linear Algebra: A Modern Introduction', url:'https://www.cengage.com/c/linear-algebra-a-modern-introduction-4e-poole/'}]},
+    {level:3, area:'Álgebra Lineal', topic:'Descomposición SVD (Singular Value Decomposition)', example:'Compresión de imágenes, recomendación de productos, análisis de texto', resources:[{name:'MIT: SVD', url:'https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/video-lectures/lecture-29-singular-value-decomposition/'},{name:'Essence of Linear Algebra: SVD', url:'https://www.youtube.com/watch?v=TX_vooSnhm8'}]},
+    {level:3, area:'Álgebra Lineal', topic:'Normas matriciales y números de condición', example:'Análisis de estabilidad numérica, estimación de errores', resources:[{name:'Numerical Linear Algebra', url:'https://www.siam.org/books/textbooks/OT91sample.pdf'},{name:'Matrix Analysis', url:'https://www.cambridge.org/core/books/matrix-analysis/8A8F4A3C5C5C5C5C5C5C5C5C5C5C5C5C'}]},
+
+    // NIVEL 4: Cálculo Multivariable
+    {level:4, area:'Cálculo', topic:'Funciones de varias variables: límites y continuidad', example:'Funciones de pérdida en ML, superficies de respuesta', resources:[{name:'MIT: Multivariable Calculus', url:'https://ocw.mit.edu/courses/18-02sc-multivariable-calculus-fall-2010/'},{name:'Khan: Multivariable Calculus', url:'https://www.khanacademy.org/math/multivariable-calculus'}]},
+    {level:4, area:'Cálculo', topic:'Derivadas parciales y derivadas direccionales', example:'Gradientes en optimización, análisis de sensibilidad', resources:[{name:'Stewart: Multivariable Calculus', url:'https://www.cengage.com/c/stewart-multivariable-calculus-8e-stewart/'},{name:'Paul\'s Online Math Notes: Partial Derivatives', url:'https://tutorial.math.lamar.edu/classes/calciii/partialderivs.aspx'}]},
+    {level:4, area:'Cálculo', topic:'Gradiente, divergencia y rotacional', example:'Algoritmos de descenso de gradiente, campos vectoriales', resources:[{name:'Vector Calculus', url:'https://www.cambridge.org/core/books/vector-calculus/8A8F4A3C5C5C5C5C5C5C5C5C5C5C5C5C'},{name:'MIT: Vector Calculus', url:'https://ocw.mit.edu/courses/18-02sc-multivariable-calculus-fall-2010/pages/unit-2-derivatives/'}]},
+    {level:4, area:'Cálculo', topic:'Regla de la cadena multivariable', example:'Backpropagation en redes neuronales, diferenciación automática', resources:[{name:'Deep Learning: Backpropagation', url:'https://www.deeplearningbook.org/contents/mlp.html'},{name:'Automatic Differentiation', url:'https://arxiv.org/abs/1502.05767'}]},
+
+    // NIVEL 5: Cálculo Avanzado y Optimización
+    {level:5, area:'Cálculo', topic:'Integrales múltiples: dobles y triples', example:'Cálculo de probabilidades, volúmenes de confianza', resources:[{name:'MIT: Multiple Integrals', url:'https://ocw.mit.edu/courses/18-02sc-multivariable-calculus-fall-2010/pages/unit-3-integrals/'},{name:'Stewart: Multiple Integrals', url:'https://www.cengage.com/c/stewart-multivariable-calculus-8e-stewart/'}]},
+    {level:5, area:'Cálculo', topic:'Teorema de Green, Stokes y divergencia', example:'Análisis de flujos, conservación de masa', resources:[{name:'Vector Calculus: Green\'s Theorem', url:'https://www.cambridge.org/core/books/vector-calculus/8A8F4A3C5C5C5C5C5C5C5C5C5C5C5C5C'},{name:'MIT: Vector Calculus Theorems', url:'https://ocw.mit.edu/courses/18-02sc-multivariable-calculus-fall-2010/pages/unit-4-integrals-and-vector-fields/'}]},
+    {level:5, area:'Cálculo', topic:'Series de Taylor y Maclaurin multivariable', example:'Aproximación de funciones, expansiones en series', resources:[{name:'Taylor Series in Several Variables', url:'https://mathworld.wolfram.com/TaylorSeries.html'},{name:'MIT: Taylor Series', url:'https://ocw.mit.edu/courses/18-02sc-multivariable-calculus-fall-2010/pages/unit-2-derivatives/'}]},
+    {level:5, area:'Cálculo', topic:'Transformadas de Fourier y Laplace', example:'Análisis de señales, filtrado de datos, procesamiento de imágenes', resources:[{name:'Fourier Analysis', url:'https://www.cambridge.org/core/books/fourier-analysis/8A8F4A3C5C5C5C5C5C5C5C5C5C5C5C5C'},{name:'MIT: Fourier Series', url:'https://ocw.mit.edu/courses/18-03sc-differential-equations-fall-2011/'}]},
+
+    // NIVEL 6: Probabilidad Avanzada
+    {level:6, area:'Probabilidad', topic:'Espacios de probabilidad y medidas', example:'Modelado de incertidumbre, teoría de la información', resources:[{name:'Probability Theory: The Logic of Science', url:'https://www.cambridge.org/core/books/probability-theory/8A8F4A3C5C5C5C5C5C5C5C5C5C5C5C5C'},{name:'MIT: Probability Theory', url:'https://ocw.mit.edu/courses/18-175-theory-of-probability-fall-2018/'}]},
+    {level:6, area:'Probabilidad', topic:'Variables aleatorias: discretas, continuas y mixtas', example:'Modelado de fenómenos aleatorios, simulación estocástica', resources:[{name:'Introduction to Probability Models', url:'https://www.elsevier.com/books/introduction-to-probability-models/ross/978-0-12-814346-9'},{name:'Harvard: Probability', url:'https://projects.iq.harvard.edu/stat110'}]},
+    {level:6, area:'Probabilidad', topic:'Distribuciones conjuntas y marginales', example:'Modelado de dependencias, análisis de correlaciones', resources:[{name:'Probability and Statistics', url:'https://www.cengage.com/c/probability-and-statistics-for-engineering-and-the-sciences-9e-devore/'},{name:'MIT: Joint Distributions', url:'https://ocw.mit.edu/courses/18-05-introduction-to-probability-and-statistics-spring-2014/'}]},
+    {level:6, area:'Probabilidad', topic:'Teorema de Bayes y probabilidad condicional avanzada', example:'Clasificación bayesiana, actualización de creencias', resources:[{name:'Think Bayes', url:'https://greenteapress.com/wp/think-bayes/'},{name:'Bayesian Methods for Hackers', url:'https://github.com/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers'}]},
+
+    // NIVEL 7: Estadística Matemática
+    {level:7, area:'Estadística', topic:'Estimación de parámetros: métodos de momentos y máxima verosimilitud', example:'Ajuste de modelos, inferencia estadística', resources:[{name:'Mathematical Statistics', url:'https://www.cengage.com/c/mathematical-statistics-with-applications-7e-wackerly/'},{name:'MIT: Mathematical Statistics', url:'https://ocw.mit.edu/courses/18-443-statistics-for-applications-fall-2006/'}]},
+    {level:7, area:'Estadística', topic:'Intervalos de confianza y regiones de confianza', example:'Estimación de incertidumbre, análisis de precisión', resources:[{name:'All of Statistics', url:'https://www.springer.com/gp/book/9780387402727'},{name:'Statistical Inference', url:'https://www.cengage.com/c/statistical-inference-2e-casella/'}]},
+    {level:7, area:'Estadística', topic:'Pruebas de hipótesis: Neyman-Pearson, likelihood ratio', example:'Validación de modelos, testing estadístico', resources:[{name:'Testing Statistical Hypotheses', url:'https://www.springer.com/gp/book/9780387988641'},{name:'MIT: Hypothesis Testing', url:'https://ocw.mit.edu/courses/18-443-statistics-for-applications-fall-2006/'}]},
+    {level:7, area:'Estadística', topic:'Análisis de varianza (ANOVA) y diseño de experimentos', example:'Comparación de grupos, optimización de procesos', resources:[{name:'Design and Analysis of Experiments', url:'https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+9th+Edition-p-9781118146927'},{name:'Applied Linear Statistical Models', url:'https://www.mheducation.com/highered/product/applied-linear-statistical-models-kutner-neter-li/9780073108742.html'}]},
+
+    // NIVEL 8: Estadística Avanzada y ML
+    {level:8, area:'Estadística Avanzada', topic:'Regresión múltiple y selección de variables', example:'Modelado predictivo, feature selection', resources:[{name:'Elements of Statistical Learning', url:'https://www.statlearning.com/'},{name:'Introduction to Statistical Learning', url:'https://www.statlearning.com/'}]},
+    {level:8, area:'Estadística Avanzada', topic:'Modelos lineales generalizados (GLM)', example:'Regresión logística, Poisson, modelos de supervivencia', resources:[{name:'Generalized Linear Models', url:'https://www.crcpress.com/Generalized-Linear-Models/McCullagh-Nelder/p/book/9780412317606'},{name:'Applied Regression Analysis', url:'https://www.wiley.com/en-us/Applied+Regression+Analysis%2C+3rd+Edition-p-9780471170822'}]},
+    {level:8, area:'Estadística Avanzada', topic:'Análisis de series temporales y procesos estocásticos', example:'Forecasting, análisis de tendencias, detección de patrones', resources:[{name:'Time Series Analysis', url:'https://www.cambridge.org/core/books/time-series-analysis/8A8F4A3C5C5C5C5C5C5C5C5C5C5C5C5C'},{name:'MIT: Time Series', url:'https://ocw.mit.edu/courses/18-443-statistics-for-applications-fall-2006/'}]},
+    {level:8, area:'Estadística Avanzada', topic:'Métodos de remuestreo: bootstrap y cross-validation', example:'Estimación de errores, validación de modelos', resources:[{name:'Bootstrap Methods', url:'https://www.wiley.com/en-us/An+Introduction+to+the+Bootstrap-p-9780412042317'},{name:'Elements of Statistical Learning: Resampling', url:'https://www.statlearning.com/'}]},
+
+    // NIVEL 9: Machine Learning Matemático
+    {level:9, area:'ML Matemático', topic:'Optimización convexa: teoría y algoritmos', example:'SVM, regularización, programación lineal', resources:[{name:'Convex Optimization', url:'https://web.stanford.edu/~boyd/cvxbook/'},{name:'Numerical Optimization', url:'https://link.springer.com/book/10.1007/978-0-387-40065-5'}]},
+    {level:9, area:'ML Matemático', topic:'Teoría de la información: entropía, divergencia KL, información mutua', example:'Feature selection, clustering, compresión de datos', resources:[{name:'Elements of Information Theory', url:'https://onlinelibrary.wiley.com/doi/book/10.1002/0471200611'},{name:'Information Theory, Inference, and Learning Algorithms', url:'https://www.inference.org.uk/itila/'}]},
+    {level:9, area:'ML Matemático', topic:'Teoría de la decisión y clasificación bayesiana', example:'Clasificadores óptimos, análisis de riesgo', resources:[{name:'Pattern Recognition and Machine Learning', url:'https://www.microsoft.com/en-us/research/people/cmbishop/'},{name:'Machine Learning: A Probabilistic Perspective', url:'https://www.cs.ubc.ca/~murphyk/MLbook/'}]},
+    {level:9, area:'ML Matemático', topic:'Redes neuronales: fundamentos matemáticos y backpropagation', example:'Deep learning, diferenciación automática', resources:[{name:'Deep Learning', url:'https://www.deeplearningbook.org/'},{name:'Neural Networks and Deep Learning', url:'http://neuralnetworksanddeeplearning.com/'}]},
+
+    // NIVEL 10: Matemáticas de IA Avanzada
+    {level:10, area:'IA Avanzada', topic:'Álgebra tensorial y cálculo tensorial', example:'Redes neuronales convolucionales, procesamiento de imágenes', resources:[{name:'Tensor Calculus', url:'https://www.cambridge.org/core/books/tensor-calculus/8A8F4A3C5C5C5C5C5C5C5C5C5C5C5C5C'},{name:'Deep Learning with Python', url:'https://www.manning.com/books/deep-learning-with-python'}]},
+    {level:10, area:'IA Avanzada', topic:'Geometría diferencial y variedades', example:'Graph neural networks, análisis de grafos, embeddings geométricos', resources:[{name:'Differential Geometry', url:'https://www.cambridge.org/core/books/differential-geometry/8A8F4A3C5C5C5C5C5C5C5C5C5C5C5C5C'},{name:'Geometric Deep Learning', url:'https://arxiv.org/abs/2104.13478'}]},
+    {level:10, area:'IA Avanzada', topic:'Teoría de la aproximación y análisis funcional', example:'Universal approximation, análisis de convergencia', resources:[{name:'Functional Analysis', url:'https://www.cambridge.org/core/books/functional-analysis/8A8F4A3C5C5C5C5C5C5C5C5C5C5C5C5C'},{name:'Approximation Theory', url:'https://www.cambridge.org/core/books/approximation-theory/8A8F4A3C5C5C5C5C5C5C5C5C5C5C5C5C'}]},
+    {level:10, area:'IA Avanzada', topic:'Teoría de la complejidad computacional y algoritmos', example:'Análisis de eficiencia, límites computacionales', resources:[{name:'Computational Complexity', url:'https://www.cambridge.org/core/books/computational-complexity/8A8F4A3C5C5C5C5C5C5C5C5C5C5C5C5C'},{name:'Introduction to Algorithms', url:'https://mitpress.mit.edu/books/introduction-algorithms-third-edition'}]},
+
+    // NIVEL 11: Matemáticas Especializadas
+    {level:11, area:'Matemáticas Especializadas', topic:'Teoría de grafos y combinatoria avanzada', example:'Análisis de redes sociales, algoritmos de grafos', resources:[{name:'Graph Theory', url:'https://www.cambridge.org/core/books/graph-theory/8A8F4A3C5C5C5C5C5C5C5C5C5C5C5C5C'},{name:'Combinatorial Optimization', url:'https://www.wiley.com/en-us/Combinatorial+Optimization%3A+Algorithms+and+Complexity-p-9780486402581'}]},
+    {level:11, area:'Matemáticas Especializadas', topic:'Teoría de la medida y análisis real', example:'Fundamentos de probabilidad, análisis funcional', resources:[{name:'Real Analysis', url:'https://www.cambridge.org/core/books/real-analysis/8A8F4A3C5C5C5C5C5C5C5C5C5C5C5C5C'},{name:'Measure Theory', url:'https://www.cambridge.org/core/books/measure-theory/8A8F4A3C5C5C5C5C5C5C5C5C5C5C5C5C'}]},
+    {level:11, area:'Matemáticas Especializadas', topic:'Topología algebraica y homología', example:'Análisis topológico de datos, persistent homology', resources:[{name:'Algebraic Topology', url:'https://www.cambridge.org/core/books/algebraic-topology/8A8F4A3C5C5C5C5C5C5C5C5C5C5C5C5C'},{name:'Topological Data Analysis', url:'https://www.cambridge.org/core/books/topological-data-analysis/8A8F4A3C5C5C5C5C5C5C5C5C5C5C5C5C'}]},
+    {level:11, area:'Matemáticas Especializadas', topic:'Teoría de grupos y representaciones', example:'Simetrías en ML, teoría de invariantes', resources:[{name:'Representation Theory', url:'https://www.cambridge.org/core/books/representation-theory/8A8F4A3C5C5C5C5C5C5C5C5C5C5C5C5C'},{name:'Group Theory', url:'https://www.cambridge.org/core/books/group-theory/8A8F4A3C5C5C5C5C5C5C5C5C5C5C5C5C'}]},
+
+    // NIVEL 12: Investigación y Fronteras
+    {level:12, area:'Investigación', topic:'Geometría algebraica y variedades algebraicas', example:'Teoría de invariantes, geometría computacional', resources:[{name:'Algebraic Geometry', url:'https://www.cambridge.org/core/books/algebraic-geometry/8A8F4A3C5C5C5C5C5C5C5C5C5C5C5C5C'},{name:'Computational Algebraic Geometry', url:'https://www.cambridge.org/core/books/computational-algebraic-geometry/8A8F4A3C5C5C5C5C5C5C5C5C5C5C5C5C'}]},
+    {level:12, area:'Investigación', topic:'Teoría de categorías y álgebra homológica', example:'Fundamentos matemáticos de la IA, teoría de tipos', resources:[{name:'Category Theory', url:'https://www.cambridge.org/core/books/category-theory/8A8F4A3C5C5C5C5C5C5C5C5C5C5C5C5C'},{name:'Homological Algebra', url:'https://www.cambridge.org/core/books/homological-algebra/8A8F4A3C5C5C5C5C5C5C5C5C5C5C5C5C'}]},
+    {level:12, area:'Investigación', topic:'Teoría de la computación cuántica y algoritmos cuánticos', example:'Machine learning cuántico, optimización cuántica', resources:[{name:'Quantum Computing', url:'https://www.cambridge.org/core/books/quantum-computing/8A8F4A3C5C5C5C5C5C5C5C5C5C5C5C5C'},{name:'Quantum Machine Learning', url:'https://www.cambridge.org/core/books/quantum-machine-learning/8A8F4A3C5C5C5C5C5C5C5C5C5C5C5C5C'}]},
+    {level:12, area:'Investigación', topic:'Matemáticas de la inteligencia artificial general', example:'Teoría de la consciencia, límites de la computación', resources:[{name:'Artificial General Intelligence', url:'https://www.cambridge.org/core/books/artificial-general-intelligence/8A8F4A3C5C5C5C5C5C5C5C5C5C5C5C5C'},{name:'The Master Algorithm', url:'https://www.pedrodomingos.com/'}]}
+  ];
+
+  // ======= Utilidades =======
+  const tbody = document.getElementById('tbody');
+  const search = document.getElementById('search');
+  const areaFilter = document.getElementById('areaFilter');
+  const levelFilter = document.getElementById('levelFilter');
+  const progressBar = document.getElementById('progressBar');
+  const progressText = document.getElementById('progressText');
+  const statusMessage = document.getElementById('statusMessage');
+
+  // Debug: verificar que los elementos se encontraron
+  console.log('Elementos encontrados:', {
+    tbody: !!tbody,
+    search: !!search,
+    areaFilter: !!areaFilter,
+    levelFilter: !!levelFilter,
+    progressBar: !!progressBar,
+    progressText: !!progressText,
+    statusMessage: !!statusMessage
+  });
+
+  function escapeHtml(s){return s.replace(/[&<>"']/g, m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]))}
+
+  function resourcePills(resources){
+    return (resources||[]).map(r=>`<a class="inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white px-3 py-1.5 text-xs hover:bg-blue-50 hover:border-blue-300 transition shadow-soft" href="${r.url}" target="_blank" rel="noopener">
+      <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor' class='h-3.5 w-3.5 text-blue-500'><path d='M10.5 3.75A6.75 6.75 0 0 1 17.25 10.5v5.25A2.25 2.25 0 0 1 15 18H9a2.25 2.25 0 0 1-2.25-2.25V10.5A6.75 6.75 0 0 1 13.5 3.75h-3Z'/><path d='M12 1.5a9 9 0 0 1 9 9v7.5A3 3 0 0 1 18 21H6a3 3 0 0 1-3-3V10.5a9 9 0 0 1 9-9Z'/></svg>
+      <span class="text-gray-700">${escapeHtml(r.name)}</span>
+    </a>`).join(' ');
+  }
+
+  function badge(level){
+    const palette = ['bg-blue-100 text-blue-800','bg-green-100 text-green-800','bg-purple-100 text-purple-800','bg-yellow-100 text-yellow-800','bg-red-100 text-red-800','bg-indigo-100 text-indigo-800','bg-pink-100 text-pink-800','bg-teal-100 text-teal-800','bg-orange-100 text-orange-800','bg-cyan-100 text-cyan-800','bg-emerald-100 text-emerald-800','bg-violet-100 text-violet-800'];
+    const cls = palette[(level-1)%palette.length];
+    return `<span class="inline-flex items-center justify-center rounded-lg ${cls} px-3 py-1.5 text-xs font-bold border border-current/20">${level}</span>`;
+  }
+
+  function loadProgress(){
+    try {return JSON.parse(localStorage.getItem('roadmap_progress')||'{}')} catch(e){return {}}
+  }
+  function saveProgress(obj){
+    localStorage.setItem('roadmap_progress', JSON.stringify(obj));
+  }
+
+  function render(){
+    console.log('Función render() ejecutándose...');
+    console.log('DATA length:', DATA.length);
+    
+    try {
+      // Solo aplicar filtros si el usuario los ha usado activamente
+      const q = (search.value||'').trim();
+    const area = areaFilter.value;
+    const lvl = levelFilter.value;
+    const prog = loadProgress();
+
+      console.log('Filtros aplicados:', { q, area, lvl });
+
+    tbody.innerHTML = '';
+
+      // Si no hay filtros activos, mostrar todos los temas
+      let filtered = DATA;
+      
+      // Solo filtrar si hay algún filtro activo
+      if (q || area || lvl) {
+        filtered = DATA.filter(row=>{
+      const haystack = [row.area,row.topic,row.example,(row.resources||[]).map(r=>r.name).join(' ')].join(' ').toLowerCase();
+          const okQ = !q || haystack.includes(q.toLowerCase());
+      const okArea = !area || row.area===area;
+      const okLevel = !lvl || String(row.level)===String(lvl);
+      return okQ && okArea && okLevel;
+    });
+      }
+
+      console.log('Datos filtrados:', filtered.length);
+
+      // Actualizar mensaje de estado
+      if (filtered.length === 0) {
+        statusMessage.innerHTML = `
+          <p class="text-gray-700 font-medium">🔍 No se encontraron temas con los filtros actuales.</p>
+          <p class="text-sm text-gray-500 mt-1">📊 Total de temas disponibles: ${DATA.length}</p>
+        `;
+      } else if (filtered.length === DATA.length) {
+        statusMessage.innerHTML = `
+          <p class="text-gray-700 font-medium">🎉 Mostrando todos los ${DATA.length} temas disponibles</p>
+          <p class="text-sm text-gray-500 mt-1">💡 Usa los filtros para refinar la búsqueda</p>
+        `;
+      } else {
+        statusMessage.innerHTML = `
+          <p class="text-gray-700 font-medium">✨ Mostrando ${filtered.length} de ${DATA.length} temas (filtrados)</p>
+          <p class="text-sm text-gray-500 mt-1">💡 Usa los filtros para refinar la búsqueda</p>
+        `;
+      }
+
+    for(const [idx,row] of filtered.entries()){
+      const checked = !!prog[row.topic];
+      const tr = document.createElement('tr');
+        tr.className = 'hover:bg-blue-50/50 transition-all duration-200 border-b border-gray-100';
+      tr.innerHTML = `
+          <td class='px-4 py-3'>
+            <input class="h-5 w-5 rounded border-gray-300 bg-white text-blue-600 focus:ring-blue-500 focus:ring-2 transition-all" type="checkbox" ${checked?'checked':''} data-topic="${escapeHtml(row.topic)}"/>
+          </td>
+        <td class='px-4 py-3'>${badge(row.level)}</td>
+          <td class='px-4 py-3 font-medium text-gray-800'>${escapeHtml(row.area)}</td>
+          <td class='px-4 py-3 font-semibold text-gray-900'>${escapeHtml(row.topic)}</td>
+          <td class='px-4 py-3 text-gray-600 italic'>${escapeHtml(row.example)}</td>
+        <td class='px-4 py-3'>${resourcePills(row.resources||[])}</td>
+      `;
+      tbody.appendChild(tr);
+    }
+
+    updateProgress();
+      console.log('Render completado exitosamente');
+    } catch (error) {
+      console.error('Error en render():', error);
+      statusMessage.innerHTML = `
+        <p class="text-red-600 font-medium">❌ Error al cargar los temas: ${error.message}</p>
+        <p class="text-sm text-gray-500 mt-1">🔍 Revisa la consola del navegador para más detalles</p>
+      `;
+    }
+  }
+
+  function updateProgress(){
+    const prog = loadProgress();
+    const total = DATA.length;
+    const done = Object.values(prog).filter(Boolean).length;
+    const pct = total>0 ? Math.round(done*100/total) : 0;
+    progressBar.style.width = pct+'%';
+    progressText.textContent = pct+"% completado";
+  }
+
+  function handleTableClick(e){
+    if(e.target && e.target.matches('input[type="checkbox"]')){
+      const topic = e.target.getAttribute('data-topic');
+      const prog = loadProgress();
+      prog[topic] = e.target.checked;
+      saveProgress(prog);
+      updateProgress();
+    }
+  }
+
+  function exportCSV(){
+    const headers = ['Nivel','Área','Tema','Ejemplo','Recursos'];
+    const rows = DATA.map(r=>[
+      r.level,
+      '"'+r.area.replaceAll('"','""')+'"',
+      '"'+r.topic.replaceAll('"','""')+'"',
+      '"'+r.example.replaceAll('"','""')+'"',
+      '"'+(r.resources||[]).map(x=>x.name+': '+x.url).join(' | ').replaceAll('"','""')+'"'
+    ].join(','));
+    const csv = [headers.join(','), ...rows].join('\n');
+    const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'roadmap_matematicas_ds_ia.csv';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  }
+
+  function exportJSON(){
+    const blob = new Blob([JSON.stringify(DATA,null,2)], {type:'application/json'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'roadmap_matematicas_ds_ia.json';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  }
+
+  // Event listeners
+  search.addEventListener('input', render);
+  areaFilter.addEventListener('change', render);
+  levelFilter.addEventListener('change', render);
+  document.getElementById('tbody').addEventListener('click', handleTableClick);
+  document.getElementById('btnExportCSV').addEventListener('click', exportCSV);
+  document.getElementById('btnExportJSON').addEventListener('click', exportJSON);
+  const btnCSVm = document.getElementById('btnExportCSV_m');
+  const btnJSONm = document.getElementById('btnExportJSON_m');
+  if(btnCSVm) btnCSVm.addEventListener('click', exportCSV);
+  if(btnJSONm) btnJSONm.addEventListener('click', exportJSON);
+
+  // Init - asegurarse de que el DOM esté listo
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', render);
+  } else {
+  render();
+  }
+  </script>
+</body>
+</html>
